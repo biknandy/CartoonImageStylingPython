@@ -2,7 +2,7 @@ import edgeDetectLoG
 import sys
 import scipy.misc as skmi
 import scipy.ndimage as skim
-import matplotlib.pyplot as plt
+from skimage import color
 
 def main(fileFull):
 	#parse file name
@@ -11,16 +11,15 @@ def main(fileFull):
 
 	#open image as array, convert to grayscale if neccessary
 	inputIm = skim.imread(fileFull)
-	hsvIm = skim.color.rgb2hsv(inputIm)
+	hsvIm = color.rgb2hsv(inputIm)
 	hueChannel = hsvIm[:,:,0]
-	arrIn = hueChannel
+	arrIn = inputIm
 
 	sigmas = [1,3,5,10]
 
 	for i in range(len(sigmas)):
 		print 'starting detect: '+str(i)
 		result = edgeDetectLoG.edgeDetectLoG(arrIn, sigmas[i])
-		result = result+inputIm
 		print 'saving file: '+str(i)+'\n'
 		finName = fileName+'_'+str(i)+'.bmp'
 		skmi.imsave(finName,result)
