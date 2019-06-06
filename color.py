@@ -43,6 +43,37 @@ def RGBfactor (input_file):
 	# matplotlib.pyplot.imshow(grey, cmap = matplotlib.cm.Greys_r)
 	# matplotlib.pyplot.show()
 
+def bitManipulation(input_file):
+	image = misc.imread(input_file)
+
+	red = image[:,:,0]
+	print(red)
+	green = image[:,:,1]
+
+	blue = image[:,:,2]
+
+	#red_bit = np.array(map(bin, red.flatten())).reshape(red.shape)
+	red_bit = np.left_shift(red, 1)
+	red_bit = np.right_shift(red,1)
+	print(red_bit)
 
 
-RGBfactor (sys.argv[1]);
+	green_bit = np.left_shift(green, 1)
+	green_bit = np.right_shift(green,1)
+
+	blue_bit = np.left_shift(blue,1)
+	blue_bit = np.right_shift(blue,1)
+
+	reconstruct = red_bit + green_bit + blue_bit
+
+	# fileName = input_file.split('.')[0]
+
+	# fileNameSave = fileName + "_copy.bmp"
+	# misc.imsave(fileNameSave, reconstruct)
+
+	matplotlib.pyplot.imshow(reconstruct)
+	matplotlib.pyplot.show()
+
+
+# RGBfactor (sys.argv[1]);
+bitManipulation(sys.argv[1])
