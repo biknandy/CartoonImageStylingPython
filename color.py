@@ -7,12 +7,13 @@ import matplotlib.cm as cm
 import numpy as np
 
 
-def main (input_file):
+def RGBfactor (input_file):
 	image = misc.imread(input_file)
 	print (image.shape)
-	factor = 2
+	factor = 4
 
 	red = image[:,:,0]
+	print (red)
 
 	green = image[:,:,1]
 
@@ -20,6 +21,7 @@ def main (input_file):
 	
 
 	red_frac = red/factor
+	print (red_frac)
 	green_frac = green/factor
 	blue_frac = blue/factor
 
@@ -28,7 +30,7 @@ def main (input_file):
 	blue_r = np.round(blue_frac)
 	
 
-	reconstruct = (factor * red) + (factor * green) + (factor * blue)
+	reconstruct = (factor * red_r) + (factor * green_r) + (factor * blue_r)
 
 	fileName = input_file.split('.')[0]
 
@@ -43,4 +45,4 @@ def main (input_file):
 
 
 
-main (sys.argv[1]);
+RGBfactor (sys.argv[1]);
