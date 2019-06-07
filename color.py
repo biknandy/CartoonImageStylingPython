@@ -1,19 +1,25 @@
 import sys
-from scipy import misc
+from scipy import misc, ndimage
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm 
 import numpy as np
+import skimage
+from skimage import data
+from skimage.color import rgb2hsv
+from skimage.filters.rank import modal
+from skimage.morphology import disk
 
 
 def RGBfactor (input_file):
-	image = misc.imread(input_file)
-	print (image.shape)
-	factor = 4
+	image = skimage.io.imread(input_file)
+	# image = image.astype(float)
+	#print (image.shape)
+	factor = 64
 
 	red = image[:,:,0]
-	print (red)
+	#print (red)
 
 	green = image[:,:,1]
 
@@ -21,27 +27,50 @@ def RGBfactor (input_file):
 	
 
 	red_frac = red/factor
-	print (red_frac)
 	green_frac = green/factor
 	blue_frac = blue/factor
 
 	red_r = np.round(red_frac)
 	green_r = np.round(green_frac)
 	blue_r = np.round(blue_frac)
+
+	#print (np.max(red_r))
 	
 
-	reconstruct = (factor * red_r) + (factor * green_r) + (factor * blue_r)
+	#Range of each color 
+	maps = np.arange(factor).reshape((4,4,4))
+
+	grey_version = maps[red_r,green_r,blue_r]
+
+	print ("GREY")
+	print(grey_version)
+
+
+
+	reconstruct = np.dstack(((factor * red_r) , (factor * green_r) ,(factor * blue_r)))
+
+	reconstruct = reconstruct + 32
+
+	#print (reconstruct)
+
+	reconstruct[reconstruct == 256] = 255
+
+	
+
+	#filtered = ndimage.median_filter(reconstruct, size = 2)
+	# modalfilt = modal(reconstruct, disk(5))
+
+
+
+
 
 	fileName = input_file.split('.')[0]
 
-	fileNameSave = fileName + "_copy.bmp"
+	fileNameSave = fileName + "_copy.jpg"
 	misc.imsave(fileNameSave, reconstruct)
 
-	#matplotlib.pyplot.imshow(reconstruct, cmap)
-	# matplotlib.pyplot.show()
-
-	# matplotlib.pyplot.imshow(grey, cmap = matplotlib.cm.Greys_r)
-	# matplotlib.pyplot.show()
+	matplotlib.pyplot.imshow(reconstruct)
+	matplotlib.pyplot.show()
 
 def bitManipulation(input_file):
 	image = misc.imread(input_file)
@@ -77,5 +106,5 @@ def bitManipulation(input_file):
 	matplotlib.pyplot.show()
 
 
-# RGBfactor (sys.argv[1]);
-bitManipulation(sys.argv[1])
+RGBfactor (sys.argv[1]);
+#bitManipulation(sys.argv[1])
