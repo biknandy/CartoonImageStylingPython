@@ -33,17 +33,44 @@ def RGBfactor (input_file):
 	red_r = np.round(red_frac)
 	green_r = np.round(green_frac)
 	blue_r = np.round(blue_frac)
-
-	#print (np.max(red_r))
 	
 
 	#Range of each color 
 	maps = np.arange(factor).reshape((4,4,4))
+	
 
 	grey_version = maps[red_r,green_r,blue_r]
 
-	print ("GREY")
-	print(grey_version)
+	#np.set_printoptions(threshold=sys.maxsize)
+
+	#print (grey_version)
+	grey_modal = skimage.filters.rank.modal(grey_version, disk (5))
+	
+	recon = np.zeros((grey_modal.shape))
+	recon = np.dstack ((recon, recon, recon))
+
+
+	for re in range(maps.shape[0]):
+		for gl in range(maps.shape[1]):
+			for bl in range(maps.shape[2]):
+				findfunc = np.where(grey_modal == maps[re, gl, bl])
+				recon[findfunc] = (re,gl,bl)
+
+	recon_scale = recon*factor
+
+	#print(recon_scale)
+
+
+	
+	
+	#findfunc = np.where(grey_modal)
+
+	#recon = maps[findfunc]
+	#print (recon)
+
+
+	matplotlib.pyplot.imshow(recon_scale)
+	matplotlib.pyplot.show()
 
 
 
@@ -69,8 +96,8 @@ def RGBfactor (input_file):
 	fileNameSave = fileName + "_copy.jpg"
 	misc.imsave(fileNameSave, reconstruct)
 
-	matplotlib.pyplot.imshow(reconstruct)
-	matplotlib.pyplot.show()
+	#matplotlib.pyplot.imshow(reconstruct)
+	#matplotlib.pyplot.show()
 
 def bitManipulation(input_file):
 	image = misc.imread(input_file)
