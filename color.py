@@ -44,9 +44,13 @@ def RGBfactor (input_file):
 	#np.set_printoptions(threshold=sys.maxsize)
 
 	#print (grey_version)
+
+
+
 	grey_modal = skimage.filters.rank.modal(grey_version, disk (5))
 	
-	recon = np.zeros((grey_modal.shape))
+
+	recon = np.zeros((grey_modal.shape)).astype(float)
 	recon = np.dstack ((recon, recon, recon))
 
 
@@ -57,16 +61,6 @@ def RGBfactor (input_file):
 				recon[findfunc] = (re,gl,bl)
 
 	recon_scale = recon*factor
-
-	#print(recon_scale)
-
-
-	
-	
-	#findfunc = np.where(grey_modal)
-
-	#recon = maps[findfunc]
-	#print (recon)
 
 
 	matplotlib.pyplot.imshow(recon_scale)
@@ -95,6 +89,12 @@ def RGBfactor (input_file):
 
 	fileNameSave = fileName + "_copy.jpg"
 	misc.imsave(fileNameSave, reconstruct)
+
+	fileNameSave = fileName + "_MODAL.bmp"
+	misc.imsave(fileNameSave, recon_scale)
+
+	print(image[17,25,:])
+	print(recon_scale[17,25,:])
 
 	#matplotlib.pyplot.imshow(reconstruct)
 	#matplotlib.pyplot.show()
