@@ -14,12 +14,11 @@ from skimage.morphology import disk
 
 def RGBfactor (input_file):
 	image = skimage.io.imread(input_file)
-	# image = image.astype(float)
+	#image = image.astype(float)
 	#print (image.shape)
 	factor = 64
 
 	red = image[:,:,0]
-	#print (red)
 
 	green = image[:,:,1]
 
@@ -43,10 +42,6 @@ def RGBfactor (input_file):
 
 	#np.set_printoptions(threshold=sys.maxsize)
 
-	#print (grey_version)
-
-
-
 	grey_modal = skimage.filters.rank.modal(grey_version, disk (5))
 	
 
@@ -60,44 +55,32 @@ def RGBfactor (input_file):
 				findfunc = np.where(grey_modal == maps[re, gl, bl])
 				recon[findfunc] = (re,gl,bl)
 
+	
+	#Modal refactoring
 	recon_scale = recon*factor
 
-
-	matplotlib.pyplot.imshow(recon_scale)
-	matplotlib.pyplot.show()
-
-
-
+	
+	#non-modal reconstruction
 	reconstruct = np.dstack(((factor * red_r) , (factor * green_r) ,(factor * blue_r)))
 
 	reconstruct = reconstruct + 32
 
-	#print (reconstruct)
-
 	reconstruct[reconstruct == 256] = 255
 
+
 	
-
-	#filtered = ndimage.median_filter(reconstruct, size = 2)
-	# modalfilt = modal(reconstruct, disk(5))
-
-
-
-
-
 	fileName = input_file.split('.')[0]
 
+
+	#Reconstruction for no modal filter with rounding 
 	fileNameSave = fileName + "_copy.jpg"
 	misc.imsave(fileNameSave, reconstruct)
 
+
+	#Reconstruct with modal filtering
 	fileNameSave = fileName + "_MODAL.bmp"
 	misc.imsave(fileNameSave, recon_scale)
 
-	print(image[17,25,:])
-	print(recon_scale[17,25,:])
-
-	#matplotlib.pyplot.imshow(reconstruct)
-	#matplotlib.pyplot.show()
 
 def bitManipulation(input_file):
 	image = misc.imread(input_file)
