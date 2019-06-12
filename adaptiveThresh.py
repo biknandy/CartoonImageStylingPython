@@ -43,28 +43,24 @@ def adaptiveThresh(im):
 	
 	im = skim.color.rgb2gray(im)*255
 	# print im	
+	
 	winSize = .05*((im.shape[0]*im.shape[1])**0.5)
 	if winSize%2 !=0:
 		winSize+=1
-	# print winSize
-	# thresholds = np.zeros(im.shape)
-	# scim.generic_filter(im,otsuThresh,winSize,output = thresholds)
-	# threshIm = np.zeros(im.shape)
-	# threshIm[im>thresholds] = 255
-	thresholds = skim.filters.threshold_local(im, winSize, offset = 10)
-	#gaussian filters image
-	#subtracts offset
+	
+	offset = 10
+
+	gaussSigma = winSize/6.0
+	thresholds = scim.gaussian_filter(im,gaussSigma,mode='reflect') - offset
 
 
 	threshIm = np.zeros(im.shape)
 	threshIm[im>thresholds] = 255
-	# plt.imshow(threshIm, cmap='gray', vmin=0, vmax=255)
-	# plt.show()
 	return threshIm
 
-# inputFile = 'cameraman_md.png'
-# im = skim.io.imread(inputFile)
-# tIm = adaptiveThresh(im)
-# fileName = inputFile.split('.')[0]
-# fileName_save = fileName + '_adaptiveThresh.bmp'
-# misc.imsave(fileName_save,tIm)
+inputFile = 'cameraman_md.png'
+im = skim.io.imread(inputFile)
+tIm = adaptiveThresh(im)
+fileName = inputFile.split('.')[0]
+fileName_save = fileName + '_adaptiveThresh.bmp'
+misc.imsave(fileName_save,tIm)
