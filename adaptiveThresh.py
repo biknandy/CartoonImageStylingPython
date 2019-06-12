@@ -58,9 +58,9 @@ def adaptiveThresh(im):
 	threshIm[im>thresholds] = 255
 	return threshIm
 
-inputFile = 'cameraman_md.png'
-im = skim.io.imread(inputFile)
-tIm = adaptiveThresh(im)
-fileName = inputFile.split('.')[0]
-fileName_save = fileName + '_adaptiveThresh.bmp'
-misc.imsave(fileName_save,tIm)
+# inputFile = 'cameraman_md.png'
+# im = skim.io.imread(inputFile)
+# tIm = adaptiveThresh(im)
+# fileName = inputFile.split('.')[0]
+# fileName_save = fileName + '_adaptiveThresh.bmp'
+# misc.imsave(fileName_save,tIm)

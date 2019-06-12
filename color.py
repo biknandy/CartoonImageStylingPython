@@ -1,9 +1,5 @@
 import sys
 from scipy import misc, ndimage
-import matplotlib
-matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm 
 import numpy as np
 import skimage
 from skimage import data
@@ -13,7 +9,6 @@ from skimage.morphology import disk
 
 
 def RGBfactor (image):
-
 	factorBase = 4
 	
 	factor = factorBase**3
@@ -85,7 +80,6 @@ def RGBfactor (image):
 
 
 def colorModalFilter(image):
-
 	red = image[:,:,0]
 
 	green = image[:,:,1]
@@ -117,11 +111,10 @@ def colorModalFilter(image):
 
 
 def bitManipulateColor(image):
-
 	bitsize = 6
 
 	red = image[:,:,0]
-	print(red)
+
 	green = image[:,:,1]
 
 	blue = image[:,:,2]
@@ -129,7 +122,6 @@ def bitManipulateColor(image):
 	#red_bit = np.array(map(bin, red.flatten())).reshape(red.shape)
 	red_bit = np.right_shift(red, bitsize)
 	red_bit = np.left_shift(red_bit,bitsize)
-	print(red_bit)
 
 
 	green_bit = np.right_shift(green, bitsize)
