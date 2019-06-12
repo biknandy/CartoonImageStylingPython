@@ -42,22 +42,24 @@ def init_centers_random(data_set, k):
     return centers
 
 
-# DONE: compute the euclidean distance from a data point to the center of a cluster
 def dist(vals, center):
+    #Minkowski functionality introduced during this project
     """
-    Helper function: compute the euclidean distance from a data point to the center of a cluster
+    Helper function: compute the minkowski distance from a data point to the center of a cluster
 
     Args:
         vals: a list of numbers (i.e. 'vals' of a data_point)
         center: a list of numbers, the center of a cluster.
 
     Returns:
-         d: the euclidean distance from a data point to the center of a cluster
+         d: the distance from a data point to the center of a cluster
+         p: Minkowski distance power (p = 2 is euclidian)
     """
     d = 0
+    p = 2.0
     for i in range(len(vals)):
-        d+= (vals[i]-center[i])**2
-    d = d**0.5
+        d+= abs(vals[i]-center[i])**p
+    d = d**(1/p)
     return d
 
 

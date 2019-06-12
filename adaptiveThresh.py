@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 
 def otsuThresh(imIn):
 	#implements Otsu's Method
-	imIn.reshape(winSize,winSize)
+	imIn = skim.color.rgb2gray(imIn)*255
+	# imIn.reshape(winSize,winSize)
 	resIm = imIn
 	imHist, histBins = skim.exposure.histogram(imIn,256)
 	imHist = imHist.astype(float)
@@ -32,31 +33,38 @@ def otsuThresh(imIn):
 			if var2>var2max:
 				var2max = var2
 				bestT = t
-	print bestT
-	# resIm[resIm<bestT] = 0
-	# resIm[resIm>=bestT] = 255
-	# return resIm
-	return bestT
+	# print bestT
+	resIm[resIm>bestT] = 255
+	resIm[resIm<=bestT] = 0
+	return resIm
+	# return bestT
 
-def adaptiveThresh(inputFile):
-	im = skim.io.imread(inputFile)
+def adaptiveThresh(im):
+	
 	im = skim.color.rgb2gray(im)*255
-	print im	
+	# print im	
 	winSize = .05*((im.shape[0]*im.shape[1])**0.5)
 	if winSize%2 !=0:
 		winSize+=1
-	print winSize
+	# print winSize
 	# thresholds = np.zeros(im.shape)
 	# scim.generic_filter(im,otsuThresh,winSize,output = thresholds)
 	# threshIm = np.zeros(im.shape)
 	# threshIm[im>thresholds] = 255
 	thresholds = skim.filters.threshold_local(im, winSize, offset = 10)
-	threshIm = np.zeros(im.shape)
-	threshIm[im<thresholds] = 255
-	plt.imshow(threshIm, cmap='gray', vmin=0, vmax=255)
-	plt.show()
-	fileName = inputFile.split('.')[0]
-	fileName_save = fileName + '_thresh.bmp'
-	misc.imsave(fileName_save,threshIm)
+	#gaussian filters image
+	#subtracts offset
 
-adaptiveThresh('cats-150x150.jpg')
+
+	threshIm = np.zeros(im.shape)
+	threshIm[im>thresholds] = 255
+	# plt.imshow(threshIm, cmap='gray', vmin=0, vmax=255)
+	# plt.show()
+	return threshIm
+
+# inputFile = 'cameraman_md.png'
+# im = skim.io.imread(inputFile)
+# tIm = adaptiveThresh(im)
+# fileName = inputFile.split('.')[0]
+# fileName_save = fileName + '_adaptiveThresh.bmp'
+# misc.imsave(fileName_save,tIm)

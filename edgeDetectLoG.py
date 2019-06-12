@@ -2,9 +2,11 @@ import numpy as np
 import math
 import scipy.ndimage as skim
 import scipy.signal as sksig
+from skimage.color import rgb2gray
 
 def edgeDetectLoG(imArray, sigma):
 	#Create Gaussian based on sigma
+	imArray = rgb2gray(imArray)*255
 	GaussFilter = makeGauss(sigma)
 	#Create Lapalacian filter
 	LapFilter = np.array([	[0,-1,0],
@@ -35,11 +37,14 @@ def detectZero(arrIn):
 		for c in range(arrIn.shape[1]):
 			#check if comparison pixel is in bounds and of opposite sign
 			if r < arrIn.shape[0]-1 and arrIn[r,c]*arrIn[r+1,c] < 0:
-				res[r,c] = 1
-			elif c < arrIn.shape[1]-1 and arrIn[r,c]*arrIn[r,c+1] < 0:
-				res[r,c] = 1
-			else:
+				# res[r,c] = 1
 				res[r,c] = 0
+			elif c < arrIn.shape[1]-1 and arrIn[r,c]*arrIn[r,c+1] < 0:
+				# res[r,c] = 1
+				res[r,c] = 0
+			else:
+				# res[r,c] = 0
+				res[r,c] = 1
 	#stub
 	res = res*255
 	return res
