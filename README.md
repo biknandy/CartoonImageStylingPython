@@ -57,7 +57,7 @@ Finally, adaptive thresholding provides a locally focused way to identify possib
 
 **Cartoonstyle.py**
 
-This python file is where our main function for the application is housed. The _cartoonStyle_ function calls adaptiveThresh to perform adaptive thresholding on the input image, and clusterColor to create the limited palette color version of the image. Then, the minimum value of these two images is used for each pixel of the results. This results in the black outlines from the adaptive thresholding being visible in the final image, and otherwise the colors are less than or equal to the pure white of the rest of the threshold output. To call _cartoonStyle_ on an image, enter the command &quot;python cartoonStyle \&lt;filename\&gt;&quot; with the file in the same folder.
+This python file is where our main function for the application is housed. The _cartoonStyle_ function calls adaptiveThresh to perform adaptive thresholding on the input image, and clusterColor to create the limited palette color version of the image. Then, the minimum value of these two images is used for each pixel of the results. This results in the black outlines from the adaptive thresholding being visible in the final image, and otherwise the colors are less than or equal to the pure white of the rest of the threshold output. To call _cartoonStyle_ on an image, enter the command ```python cartoonStyle filename``` with the file in the same folder.
 
 The file also contains a function named _cartoonStyleGrid_ which we used for our testing and results. This function calls the highest level functions from all the other files and creates a grid of different combinations between color palette simplification and edge/border detection so we can easily evaluate all possible options.
 
