@@ -20,7 +20,9 @@ In order to improve the smoothness of results achieved when rounding an RGB colo
 
 The final method of color palette reduction involves utilizing an image version of the k-means machine learning clustering algorithm. The k-means clustering algorithm works by setting initial centroid values and assigning pixel values to clusters based on these centroid values. Then the algorithm switches between doing this and picking new centroids based on the current clusters. The data is assigned to a centroid using the following formula:
 
+```
 argmin (dist(c,x))
+```
 
 Here, _c_ is the full collection of centroids and the distance metric is either Minkowski or Euclidean (p=2).
 
@@ -36,11 +38,11 @@ Laplacian of the Gaussian edge detection is an intuitive first step in detecting
 
 Another method for identifying areas that could be set to black in the final image is the use of Otsu&#39;s method thresholding. This method analyzes the histogram of an image in order to select a threshold that minimizes the intra-class variance of the two resulting classes, or equivalently, maximizes the inter-class variance. The mathematical details of Otsu&#39;s method are discussed further in the _ **Methods** _.
 
-Finally, adaptive thresholding provides a locally focused way to identify possible borders for the image. This is performed by convolving the image with a gaussian filter, and then subtracting an offset value and setting pixels greater than this filter to white and less than the filter values to black. This results in a localized thresholding because each pixel&#39;s threshold value is determined only by the value of their gaussian filtered neighborhood. The specifics of our implementation are discussed in detail in the _ **Methods** _ section
+Finally, adaptive thresholding provides a locally focused way to identify possible borders for the image. This is performed by convolving the image with a gaussian filter, and then subtracting an offset value and setting pixels greater than this filter to white and less than the filter values to black. This results in a localized thresholding because each pixel&#39;s threshold value is determined only by the value of their gaussian filtered neighborhood. The specifics of our implementation are discussed in detail in the _**Methods**_ section
 
 ### II. Methods
 
-**\*See** _ **VI. References** _ **for required python packages\***
+**\*See** _**VI. References**_ **for required python packages\***
 
 **.py files created for application:**
 
@@ -63,7 +65,7 @@ This file provides a handful of methods to simplify the color palette of an imag
 
 **kmean.py**
 
-This file includes multiple helper functions for the k-means clustering algorithm performed in _ **clusterColor.py** _. The distance function is implemented and parameterized such that any value of p for a Minkowski distance can be used. We tested this alternative distance metric after reading &quot;Choice of distance metrics for RGB color image analysis&quot; [1] and identifying that Minkowski with p = 5 was one of the higher performing metrics for color segmentation of RGB images. However, we have selected Euclidean distance (p = 2) as we saw little aesthetic improvement in our results when using a Minkowski distance metric with p = 5.
+This file includes multiple helper functions for the k-means clustering algorithm performed in _**clusterColor.py**_. The distance function is implemented and parameterized such that any value of p for a Minkowski distance can be used. We tested this alternative distance metric after reading &quot;Choice of distance metrics for RGB color image analysis&quot; [1] and identifying that Minkowski with p = 5 was one of the higher performing metrics for color segmentation of RGB images. However, we have selected Euclidean distance (p = 2) as we saw little aesthetic improvement in our results when using a Minkowski distance metric with p = 5.
 
 **clusterColor.py**
 
@@ -175,7 +177,7 @@ Our first color palette reduction technique we tested was bit manipulation. It p
 
 Our next color reduction technique was the k-means clustering algorithm. This technique proved to be the most successful as clustering the colors resulted in the most accurate representation of the original colors and provides the least artifacting. We found through inspection that a k value of 15 provided the best results, as having significantly fewer centroids (such as k=7) resulted in some strong discoloration, while larger k values (such as k = 30) resulted in too realistic of an image. We also tested an alternative distance metric, the Minkowski distance with p=5 that has been previously evaluated to be more effective in image color clustering [1]. However, as seen in the final results for **bik.jpg** , there is little aesthetic difference between the two. Because we preferred the style of the euclidean result, we chose this distance metric for our final implementation.
 
-In conclusion, we found that a k value of 15 utilizing a k-means clustering algorithm on the image paired with adaptive thresholding allowed us to recreate the original image to its cartoon likeness. A definite shortcoming of our algorithm is that it is not intelligent enough to adapt to different styles of images. For example, our _ **Image 3** _came out as a much more accurate comic representation of the original than say _ **Image 5** _ as our k-means clustering machine learning algorithm does not adapt to different styles of images. Also, it seemed that our algorithm did not work as well with lower resolution images as there are less pixels involved. Some different ways we could have completed this application was by using bilateral filtering which is an edge-preserving, and noise-reducing smoothing filter that could help with coloring. Also, a more developed machine learning algorithm could be implemented to detect the type, style, setting, and/or format of an image better to adapt the cartoon styling process.
+In conclusion, we found that a k value of 15 utilizing a k-means clustering algorithm on the image paired with adaptive thresholding allowed us to recreate the original image to its cartoon likeness. A definite shortcoming of our algorithm is that it is not intelligent enough to adapt to different styles of images. For example, our _**Image 3**_came out as a much more accurate comic representation of the original than say _**Image 5**_ as our k-means clustering machine learning algorithm does not adapt to different styles of images. Also, it seemed that our algorithm did not work as well with lower resolution images as there are less pixels involved. Some different ways we could have completed this application was by using bilateral filtering which is an edge-preserving, and noise-reducing smoothing filter that could help with coloring. Also, a more developed machine learning algorithm could be implemented to detect the type, style, setting, and/or format of an image better to adapt the cartoon styling process.
 
 ### V. References
 
