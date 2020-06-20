@@ -177,7 +177,7 @@ Our next color reduction technique was the k-means clustering algorithm. This te
 
 In conclusion, we found that a k value of 15 utilizing a k-means clustering algorithm on the image paired with adaptive thresholding allowed us to recreate the original image to its cartoon likeness. A definite shortcoming of our algorithm is that it is not intelligent enough to adapt to different styles of images. For example, our _ **Image 3** _came out as a much more accurate comic representation of the original than say _ **Image 5** _ as our k-means clustering machine learning algorithm does not adapt to different styles of images. Also, it seemed that our algorithm did not work as well with lower resolution images as there are less pixels involved. Some different ways we could have completed this application was by using bilateral filtering which is an edge-preserving, and noise-reducing smoothing filter that could help with coloring. Also, a more developed machine learning algorithm could be implemented to detect the type, style, setting, and/or format of an image better to adapt the cartoon styling process.
 
-### V. References** _
+### V. References
 
 [1] Sanda Mahama, Dossa, and Gouton (2016). &quot;[Choice of distance metrics for RGB color image analysis](https://www.ingentaconnect.com/content/ist/ei/2016/00002016/00000020/art00036?crawler=true)&quot;. _Society for Imaging Science and Technology_.
 
