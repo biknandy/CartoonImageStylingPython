@@ -1,4 +1,4 @@
-# Cartoon Image Styling in Python - ECE 160 Final Project
+# Cartoon Image Styling in Python
 
 **Cartoon Styling Image with Python**
 
@@ -8,7 +8,7 @@ June 12, 2019
 
 **Abstract: The goal of this project is to turn an image into its cartoon style in Python. We tested multiple color palette reduction and border detection/threshold methods in order to simplify an image so that it can be represented as a small number of colors and black outlines. We found that a k-means color clustering algorithm implementation with a k value of 15 paired with adaptive thresholding to determine borders works best and included it as our final algorithm for the application.**
 
-_ **I. Introduction** _
+### I. Introduction
 
 As multiple new mobile applications are released involving manipulating camera images through filters, such as Snapchat and Instagram, we thought it would be exciting to try and recreate one of these photo manipulations and investigate methods to turn an image into its cartoon style. This task can be decomposed into 2 components: simplifying the color palette and identifying edges and borders to darken.
 
@@ -38,7 +38,7 @@ Another method for identifying areas that could be set to black in the final ima
 
 Finally, adaptive thresholding provides a locally focused way to identify possible borders for the image. This is performed by convolving the image with a gaussian filter, and then subtracting an offset value and setting pixels greater than this filter to white and less than the filter values to black. This results in a localized thresholding because each pixel&#39;s threshold value is determined only by the value of their gaussian filtered neighborhood. The specifics of our implementation are discussed in detail in the _ **Methods** _ section
 
-_ **II. Methods** _
+### II. Methods
 
 **\*See** _ **VI. References** _ **for required python packages\***
 
@@ -89,7 +89,7 @@ Then, the threshold values for each pixel are determined by convolving the image
 
 This file implements Laplacian of the Gaussian edge detection with a sigma of 3 for the gaussian filter. It first converts the image to grayscale and convolves it with the laplacian of the gaussian filter. It then identifies zero crossings and sets these to 0, otherwise the pixel is set to 255. This filter is returned as a grayscale image.
 
-_ **III. Results** _
+### III. Results
 
 In addition to the images shown below, a few more results with the original and cartoon styled images are included in our submission.
 
@@ -161,7 +161,7 @@ Final Result (Euclidian, Minkowski)
 
 ![](RackMultipart20200620-4-kdbwj2_html_2f3967c39d6d28b1.jpg) ![](RackMultipart20200620-4-kdbwj2_html_f64556e9a379d4d9.jpg)
 
-_ **IV. Discussion and Conclusion** _
+### IV. Discussion and Conclusion
 
 Of the different approaches, a k-means clustering of colors with a k-value of 15 and an iteration limit of 30 paired with adaptive thresholding proved to result in the most successful &quot;cartoon-like&quot; image out of all the different combinations of image stylings. This is because it properly reduces the color palette without significant artifacting and preserves the image subject, while also emphasizing borders between object regions.
 
@@ -177,54 +177,8 @@ Our next color reduction technique was the k-means clustering algorithm. This te
 
 In conclusion, we found that a k value of 15 utilizing a k-means clustering algorithm on the image paired with adaptive thresholding allowed us to recreate the original image to its cartoon likeness. A definite shortcoming of our algorithm is that it is not intelligent enough to adapt to different styles of images. For example, our _ **Image 3** _came out as a much more accurate comic representation of the original than say _ **Image 5** _ as our k-means clustering machine learning algorithm does not adapt to different styles of images. Also, it seemed that our algorithm did not work as well with lower resolution images as there are less pixels involved. Some different ways we could have completed this application was by using bilateral filtering which is an edge-preserving, and noise-reducing smoothing filter that could help with coloring. Also, a more developed machine learning algorithm could be implemented to detect the type, style, setting, and/or format of an image better to adapt the cartoon styling process.
 
-_ **V. Author Contributions** _
-
-Every time we worked on this challenge problem, we utilized peer programming techniques. Bik Nandy worked on the color palette simplification. Griffin Danninger worked primarily on the edge detection and adaptive threshold code as well as refactored his previous code of k-means with the help of Bik to apply to our current project. Griffin and Bik worked together to collect test data and collaboratively wrote this report on a Google document.
-
-_ **VI. References** _
+### V. References** _
 
 [1] Sanda Mahama, Dossa, and Gouton (2016). &quot;[Choice of distance metrics for RGB color image analysis](https://www.ingentaconnect.com/content/ist/ei/2016/00002016/00000020/art00036?crawler=true)&quot;. _Society for Imaging Science and Technology_.
 
 [2] Nobuyuki Otsu (1979). &quot;[A Threshold Selection Method from Gray-level Histograms](https://ieeexplore.ieee.org/document/4310076)&quot;. _IEEE Trans. Sys., Man., Cyber._ **9** (1): 62-66.
-
-K-means code was originally developed by Griffin Danninger for CS165B, and was adapted by Griffin and Bik for use with images for this program.
-
-**Required Python Packages (also in requirements.txt):**
-
-backports.functools-lru-cache==1.5
-
-cloudpickle==1.1.1
-
-cycler==0.10.0
-
-dask==1.2.2
-
-decorator==4.4.0
-
-kiwisolver==1.1.0
-
-matplotlib==2.2.4
-
-networkx==2.2
-
-numpy==1.16.4
-
-Pillow==6.0.0
-
-pyparsing==2.4.0
-
-python-dateutil==2.8.0
-
-pytz==2019.1
-
-PyWavelets==1.0.3
-
-scikit-image==0.14.2
-
-scipy==1.2.1
-
-six==1.12.0
-
-subprocess32==3.5.4
-
-toolz==0.9.0
