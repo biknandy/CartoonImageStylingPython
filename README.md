@@ -108,6 +108,7 @@ In addition to the images shown below, a few more results with the original and 
 **Image 1: Lena3.bmp**
 
 Original Image
+
 <img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture1.png">
 
 Styled Image Combinations (attached as **lena3\_grid.bmp** )
