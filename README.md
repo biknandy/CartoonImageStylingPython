@@ -26,9 +26,11 @@ argmin (dist(c,x))
 
 Here, _c_ is the full collection of centroids and the distance metric is either Minkowski or Euclidean (p=2).
 
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/form1.png" width="200">
+
 The centroids are found from the following formula:
 
-![](RackMultipart20200620-4-kdbwj2_html_92f07c00ddffd118.png)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/form2.png" width="100">
 
 _Si_ is the set of data point assignments for each _ith_ cluster.
 
@@ -77,13 +79,21 @@ This file implements Otsu&#39;s Method [2] for thresholding and localized adapti
 
 For Otsu&#39;s method, the goal of minimizing intra-class variance is performed as the equivalent maximizing of the inter-class variance. To achieve for each possible threshold, two weights are computed.
 
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/form3.png" width="200">
+
 _Where L = number of histogram bins, t is the threshold, and p(n) is the probability of pixel value n_
 
 Then, the class means are computed such that
 
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/form4.png" width="200">
+
 Finally the inter-class variance is computed as specified below, and the threshold t with the maximum inter-class variance is selected. Values below the threshold are set to black, and values above are set to white. This result is returned as a greyscale image.
 
-Adaptive thresholding is implemented through convolution with a gaussian filter and the subtraction of an offset value to determine the threshold at each point in the image. First, a window size for the gaussian filter is determined based on the size of the image using the equation below. This allows the adaptive thresholding to perform in a similar style on similar images of different resolutions
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/form5.png" width="200">
+
+Adaptive thresholding is implemented through convolution with a gaussian filter and the subtraction of an offset value to determine the threshold at each point in the image. First, a window size for the gaussian filter is determined based on the size of the image using the equation below. This allows the adaptive thresholding to perform in a similar style on similar images of different resolutions.
+
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/form6.png" width="200">
 
 Then, the threshold values for each pixel are determined by convolving the image with the gaussian filter using reflection to fill empty edge values, and an offset of 10 is subtracted. Pixel values above their threshold are set to 255, and the remainder are set to 0. This filter is returned as a greyscale image.
 
@@ -98,70 +108,63 @@ In addition to the images shown below, a few more results with the original and 
 **Image 1: Lena3.bmp**
 
 Original Image
-
-![](RackMultipart20200620-4-kdbwj2_html_862c7cc4a01e0448.png)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture1.png">
 
 Styled Image Combinations (attached as **lena3\_grid.bmp** )
 
-![](RackMultipart20200620-4-kdbwj2_html_d0aa40c943c6ad17.gif)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture2.png">
 
 Final Result
 
-![](RackMultipart20200620-4-kdbwj2_html_67a5927975ab0835.jpg)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture3.png">
 
 **Image 2: windows.jpeg**
 
 Original Image
 
-![](RackMultipart20200620-4-kdbwj2_html_7497f93afa0c05c8.png)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture4.png">
 
 Styled Image Combinations (attached as **windows\_grid.bmp** )
 
-![](RackMultipart20200620-4-kdbwj2_html_f2095e738bb50815.gif)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture5.png">
 
 Final Image
 
-![](RackMultipart20200620-4-kdbwj2_html_2df002f889dfd859.jpg)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture6.png">
 
 **Image 3: windows\_explosion.bmp**
 
 Original Image
 
-![](RackMultipart20200620-4-kdbwj2_html_5bdc95bbe593d9f6.jpg)
-
-Styled Image Combination is attached as **windows\_explosion\_grid.bmp** _(See zip folder)_
-
-Follows same grid categories as other examples
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture7.png">
 
 Final Image
 
-![](RackMultipart20200620-4-kdbwj2_html_14235fb89a71aa77.jpg)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture8.png">
 
 **Image 4: beach.jpeg**
 
 Original Image
 
-![](RackMultipart20200620-4-kdbwj2_html_3a8e90905a97c315.jpg)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture9.png">
 
 Styled Image Combination (attached as **beach\_grid.bmp** )
 
-![](RackMultipart20200620-4-kdbwj2_html_80b925b07c821460.gif)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture10.png">
 
 Final Image
 
-![](RackMultipart20200620-4-kdbwj2_html_dbbd8f3672023844.jpg)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture11.png">
 
 **Image 5: bik.jpg**
 
 Original
 
-![](RackMultipart20200620-4-kdbwj2_html_ac16db348ddef95a.jpg)
-
-Styled Image Combination (attached as bik\_grid\_offset10.bmp)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture12.png">
 
 Final Result (Euclidian, Minkowski)
 
-![](RackMultipart20200620-4-kdbwj2_html_2f3967c39d6d28b1.jpg) ![](RackMultipart20200620-4-kdbwj2_html_f64556e9a379d4d9.jpg)
+<img src="https://github.com/biknandy/CartoonImageStylingPython/blob/master/toonimg/Picture13.png">
 
 ### IV. Discussion and Conclusion
 
