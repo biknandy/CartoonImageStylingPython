@@ -4,7 +4,7 @@
 
 Bik Nandy &amp; Griffin Danninger
 
-June 12, 2019
+June 2019
 
 **Abstract: The goal of this project is to turn an image into its cartoon style in Python. We tested multiple color palette reduction and border detection/threshold methods in order to simplify an image so that it can be represented as a small number of colors and black outlines. We found that a k-means color clustering algorithm implementation with a k value of 15 paired with adaptive thresholding to determine borders works best and included it as our final algorithm for the application.**
 
